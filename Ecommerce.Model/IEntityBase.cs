@@ -1,6 +1,4 @@
-﻿
-
-namespace Ecommerce.Model
+﻿namespace Ecommerce.Model
 {
     public interface IEntityBase
     {

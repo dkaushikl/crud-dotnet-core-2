@@ -5,10 +5,12 @@ namespace Ecommerce.Data
 {
     public class EcommerceContext : DbContext
     {
+        public EcommerceContext(DbContextOptions options) : base(options)
+        {
+        }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-
-        public EcommerceContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,7 +32,8 @@ namespace Ecommerce.Data
 
             modelBuilder.Entity<Product>().Property(u => u.Size).IsRequired();
 
-            modelBuilder.Entity<Product>().HasOne(a => a.Categories).WithMany(u => u.Products).HasForeignKey(a => a.CategoryId);
+            modelBuilder.Entity<Product>().HasOne(a => a.Categories).WithMany(u => u.Products)
+                .HasForeignKey(a => a.CategoryId);
         }
     }
 }

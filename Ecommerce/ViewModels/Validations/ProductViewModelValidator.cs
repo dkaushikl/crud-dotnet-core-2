@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ecommerce.Api.ViewModels.Validations
+namespace Ecommerce.ViewModels.Validations
 {
     public class ProductViewModelValidator : AbstractValidator<ProductViewModel>
     {

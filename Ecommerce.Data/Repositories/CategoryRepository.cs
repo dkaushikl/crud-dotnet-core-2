@@ -5,6 +5,8 @@ namespace Ecommerce.Data.Repositories
 {
     public class CategoryRepository : EntityBaseRepository<Category>, ICategoryRepository
     {
-        public CategoryRepository(EcommerceContext context)  : base(context)  { }
+        public CategoryRepository(EcommerceContext context) : base(context)
+        {
+        }
     }
 }

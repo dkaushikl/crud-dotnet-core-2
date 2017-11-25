@@ -1,11 +1,11 @@
-﻿using Ecommerce.Data.Abstract;
-using Ecommerce.Model;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Ecommerce.Data.Abstract;
+using Ecommerce.Model;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Ecommerce.Data.Repositories
 {
@@ -14,10 +14,12 @@ namespace Ecommerce.Data.Repositories
         private readonly EcommerceContext _context;
 
         #region Properties
+
         public EntityBaseRepository(EcommerceContext context)
         {
             _context = context;
         }
+
         #endregion
 
         public virtual IEnumerable<T> GetAll()
@@ -29,13 +31,12 @@ namespace Ecommerce.Data.Repositories
         {
             return _context.Set<T>().Count();
         }
+
         public virtual IEnumerable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = _context.Set<T>();
             foreach (var includeProperty in includeProperties)
-            {
                 query = query.Include(includeProperty);
-            }
             return query.AsEnumerable();
         }
 
@@ -53,9 +54,7 @@ namespace Ecommerce.Data.Repositories
         {
             IQueryable<T> query = _context.Set<T>();
             foreach (var includeProperty in includeProperties)
-            {
                 query = query.Include(includeProperty);
-            }
 
             return query.Where(predicate).FirstOrDefault();
         }
@@ -76,6 +75,7 @@ namespace Ecommerce.Data.Repositories
             EntityEntry dbEntityEntry = _context.Entry(entity);
             dbEntityEntry.State = EntityState.Modified;
         }
+
         public virtual void Delete(T entity)
         {
             EntityEntry dbEntityEntry = _context.Entry(entity);
@@ -87,9 +87,7 @@ namespace Ecommerce.Data.Repositories
             IEnumerable<T> entities = _context.Set<T>().Where(predicate);
 
             foreach (var entity in entities)
-            {
                 _context.Entry(entity).State = EntityState.Deleted;
-            }
         }
 
         public virtual void Commit()

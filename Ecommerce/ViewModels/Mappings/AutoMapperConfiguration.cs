@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Ecommerce.Api.ViewModels.Mappings
+namespace Ecommerce.ViewModels.Mappings
 {
     public class AutoMapperConfiguration
     {

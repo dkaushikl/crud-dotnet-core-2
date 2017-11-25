@@ -1,7 +1,7 @@
-﻿using Ecommerce.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Ecommerce.Model;
 
 namespace Ecommerce.Data.Abstract
 {

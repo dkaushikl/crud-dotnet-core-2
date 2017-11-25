@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace Ecommerce.Data.Migrations
 {
@@ -9,57 +7,57 @@ namespace Ecommerce.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "Size",
-                table: "Product",
-                type: "nvarchar(max)",
+                "Size",
+                "Product",
+                "nvarchar(max)",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Product",
-                type: "nvarchar(250)",
+                "Name",
+                "Product",
+                "nvarchar(250)",
                 maxLength: 250,
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Description",
-                table: "Product",
-                type: "nvarchar(max)",
+                "Description",
+                "Product",
+                "nvarchar(max)",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Color",
-                table: "Product",
-                type: "nvarchar(max)",
+                "Color",
+                "Product",
+                "nvarchar(max)",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Category",
-                type: "nvarchar(250)",
+                "Name",
+                "Category",
+                "nvarchar(250)",
                 maxLength: 250,
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_CategoryId",
-                table: "Product",
-                column: "CategoryId");
+                "IX_Product_CategoryId",
+                "Product",
+                "CategoryId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Product_Category_CategoryId",
-                table: "Product",
-                column: "CategoryId",
-                principalTable: "Category",
+                "FK_Product_Category_CategoryId",
+                "Product",
+                "CategoryId",
+                "Category",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -67,45 +65,45 @@ namespace Ecommerce.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Product_Category_CategoryId",
-                table: "Product");
+                "FK_Product_Category_CategoryId",
+                "Product");
 
             migrationBuilder.DropIndex(
-                name: "IX_Product_CategoryId",
-                table: "Product");
+                "IX_Product_CategoryId",
+                "Product");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Size",
-                table: "Product",
+                "Size",
+                "Product",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Product",
+                "Name",
+                "Product",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(250)",
                 oldMaxLength: 250);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Description",
-                table: "Product",
+                "Description",
+                "Product",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Color",
-                table: "Product",
+                "Color",
+                "Product",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Category",
+                "Name",
+                "Category",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(250)",

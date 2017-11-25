@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace Ecommerce.Api.Core
+namespace Ecommerce.Core
 {
     public static class Extensions
     {

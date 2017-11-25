@@ -10,8 +10,9 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Ecommerce.Data;
 using Microsoft.EntityFrameworkCore;
-using Ecommerce.Api.ViewModels.Mappings;
-using Ecommerce.Api.Core;
+using Ecommerce.Core;
+using Ecommerce.ViewModels.Mappings;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Ecommerce
 {
@@ -51,6 +52,11 @@ namespace Ecommerce
                {
                    opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -87,6 +93,13 @@ namespace Ecommerce
                      "{controller=Home}/{action=Index}/{id?}");
             });
 
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+
+            });
             EcommerceDbInitilizer.Initialize(app.ApplicationServices);
         }
     }

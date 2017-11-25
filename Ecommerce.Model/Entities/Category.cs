@@ -9,10 +9,11 @@ namespace Ecommerce.Model.Entities
             Products = new List<Product>();
         }
 
-        public int Id { get; set; }
         public string Name { get; set; }
         public int Sequence { get; set; }
 
         public ICollection<Product> Products { get; set; }
+
+        public int Id { get; set; }
     }
 }

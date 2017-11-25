@@ -1,11 +1,9 @@
-﻿
-
-using Ecommerce.Api.ViewModels.Validations;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Ecommerce.ViewModels.Validations;
 
-namespace Ecommerce.Api.ViewModels
+namespace Ecommerce.ViewModels
 {
     public class ProductViewModel : IValidatableObject
     {

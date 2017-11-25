@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Ecommerce.Api.Core;
-using Ecommerce.Api.ViewModels;
+using Ecommerce.Core;
 using Ecommerce.Data.Abstract;
 using Ecommerce.Model.Entities;
+using Ecommerce.ViewModels;
+using Ecommerce.ViewModels.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers
@@ -24,6 +25,11 @@ namespace Ecommerce.Controllers
             _productRepository = productRepository;
         }
 
+        /// <summary>
+        ///  get api/Category
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public IActionResult Get()
         {
             var pagination = Request.Headers["Pagination"];
@@ -47,15 +53,25 @@ namespace Ecommerce.Controllers
                 .Take(currentPageSize)
                 .ToList();
 
-            var categoriesVm = Mapper.Map<IEnumerable<Category>, IEnumerable<CategoryViewModel>>(categories);
+            var list = Mapper.Map<IEnumerable<Category>, IEnumerable<CategoryViewModel>>(categories).ToList();
 
             Response.AddPagination(_page, _pageSize, totalUsers, totalPages);
 
-            return new OkObjectResult(categoriesVm);
+            return new OkObjectResult(new Response<IEnumerable<CategoryViewModel>>
+            {
+                IsSuccess = true,
+                JsonObj = list,
+                Message = "Success",
+                TotalCount = list.Count()
+            });
         }
 
-
-        [HttpGet("{id}", Name = "GetCategory")]
+        /// <summary>
+        ///  get api/Category/GetCategory/1
+        /// </summary>
+        /// <param name="id">Category Id</param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var objCategory = _categoryRepository.GetSingle(u => u.Id == id);
@@ -63,13 +79,22 @@ namespace Ecommerce.Controllers
             if (objCategory == null) return NotFound();
 
             var objCategoryViewModel = Mapper.Map<Category, CategoryViewModel>(objCategory);
-            return new OkObjectResult(objCategoryViewModel);
+
+            return new OkObjectResult(new Response<CategoryViewModel>
+            {
+                IsSuccess = objCategoryViewModel != null,
+                JsonObj = objCategoryViewModel,
+            });
         }
 
-        [HttpPost]
+        /// <summary>
+        /// post api/Category/Create
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        [HttpPost(Name = "CreateCategory")]
         public IActionResult Create([FromBody]CategoryViewModel category)
         {
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -78,10 +103,20 @@ namespace Ecommerce.Controllers
             _categoryRepository.Commit();
 
             category = Mapper.Map<Category, CategoryViewModel>(newCategory);
-            return new OkObjectResult(category);
+            return new OkObjectResult(new Response<CategoryViewModel>
+            {
+                IsSuccess = category != null,
+                JsonObj = category,
+            });
         }
 
-        [HttpPut("{id}")]
+        /// <summary>
+        /// put api/Category/Put/1
+        /// </summary>
+        /// <param name="id">Category Id</param>
+        /// <param name="category">Category</param>
+        /// <returns></returns>
+        [HttpPost("{id}", Name = "EditCategory")]
         public IActionResult Put(int id, [FromBody]CategoryViewModel category)
         {
             if (!ModelState.IsValid)
@@ -98,12 +133,21 @@ namespace Ecommerce.Controllers
             oldCategory.Sequence = category.Sequence;
             _categoryRepository.Commit();
 
-            Mapper.Map<Category, CategoryViewModel>(oldCategory);
+            category = Mapper.Map<Category, CategoryViewModel>(oldCategory);
 
-            return new NoContentResult();
+            return new OkObjectResult(new Response<CategoryViewModel>
+            {
+                IsSuccess = category != null,
+                JsonObj = category,
+            });
         }
 
-        [HttpDelete("{id}")]
+        /// <summary>
+        /// delete api/Category/Delete/1
+        /// </summary>
+        /// <param name="id">Category Id</param>
+        /// <returns></returns>
+        [HttpDelete("{id}", Name = "DeleteCategory")]
         public IActionResult Delete(int id)
         {
             var objCategory = _categoryRepository.GetSingle(id);
@@ -122,7 +166,11 @@ namespace Ecommerce.Controllers
 
             _categoryRepository.Commit();
 
-            return new NoContentResult();
+            return new OkObjectResult(new Response<CategoryViewModel>
+            {
+                IsSuccess = true
+            });
+
         }
     }
 }

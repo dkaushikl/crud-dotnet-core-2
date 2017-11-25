@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Ecommerce.Model.Entities;
 
-namespace Ecommerce.Api.ViewModels.Mappings
+namespace Ecommerce.ViewModels.Mappings
 {
     public class ViewModelToDomainMappingProfile : Profile
     {

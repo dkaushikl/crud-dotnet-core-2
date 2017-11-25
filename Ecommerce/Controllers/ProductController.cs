@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Ecommerce.Api.Core;
-using Ecommerce.Api.ViewModels;
+using Ecommerce.Core;
 using Ecommerce.Data.Abstract;
 using Ecommerce.Model.Entities;
+using Ecommerce.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers
@@ -24,6 +24,7 @@ namespace Ecommerce.Controllers
             _productRepository = productRepository;
         }
 
+        [HttpGet]
         public IActionResult Get()
         {
             var pagination = Request.Headers["Pagination"];
