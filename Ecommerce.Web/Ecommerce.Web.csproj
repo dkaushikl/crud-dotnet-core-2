@@ -22,15 +22,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\category\category.component.ts" />
     <None Remove="ClientApp\core\domain\Category.ts" />
     <None Remove="ClientApp\core\domain\product.ts" />
     <None Remove="ClientApp\core\domain\response.ts" />
+    <None Remove="ClientApp\core\service\category.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\category\category.component.ts" />
     <TypeScriptCompile Include="ClientApp\core\domain\category.ts" />
     <TypeScriptCompile Include="ClientApp\core\domain\product.ts" />
     <TypeScriptCompile Include="ClientApp\core\domain\response.ts" />
+    <TypeScriptCompile Include="ClientApp\core\service\category.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
